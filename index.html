@@ -156,8 +156,15 @@
             
             const date = new Date();
             date.setDate(date.getDate() - 30);
+
+            if (lang == "wd"){
+                console.log("blah")
+                var url = `https://wikidata.org/w/api.php?action=query&list=usercontribs&ucuser=${encodeURIComponent(user)}&ucprop=title|sizediff|timestamp&ucend=${date.toISOString()}&uclimit=500&format=json&origin=*`;
+            } else{
+                var url = `https://${lang}.wikipedia.org/w/api.php?action=query&list=usercontribs&ucuser=${encodeURIComponent(user)}&ucprop=title|sizediff|timestamp&ucend=${date.toISOString()}&uclimit=500&format=json&origin=*`;
+            }
             
-            const url = `https://${lang}.wikipedia.org/w/api.php?action=query&list=usercontribs&ucuser=${encodeURIComponent(user)}&ucprop=title|sizediff|timestamp&ucend=${date.toISOString()}&uclimit=500&format=json&origin=*`;
+            
 
             try {
                 const res = await fetch(url);
